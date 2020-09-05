@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/khanghldk/gokit/constants"
 	"github.com/khanghldk/gokit/templates"
@@ -36,36 +37,50 @@ var newCmd = &cobra.Command{
 
 		switch genType {
 		case "controller":
+			fmt.Println(constants.ColorYellow, "Generate controller...")
+			time.Sleep(time.Second)
 			err := GenerateController(params)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 
+			fmt.Println(constants.ColorYellow, "Generate service...")
+			time.Sleep(time.Second)
 			err = GenerateService(params)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 
+			fmt.Println(constants.ColorYellow, "Generate repository...")
+			time.Sleep(time.Second)
 			err = GenerateRepository(params)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 		case "service":
+			fmt.Println(constants.ColorYellow, "Generate serivce...")
+			time.Sleep(time.Second)
 			err := GenerateService(params)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 
+			fmt.Println(constants.ColorYellow, "Generate repository...")
+			time.Sleep(time.Second)
 			err = GenerateRepository(params)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 		case "repository":
+			fmt.Println(constants.ColorYellow, "Generate repository...")
+			time.Sleep(time.Second)
 			err := GenerateRepository(params)
 			if err != nil {
 				logrus.Fatal(err)
 			}
 		}
+
+		fmt.Println("Finish!")
 	},
 }
 

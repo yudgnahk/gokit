@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/khanghldk/gokit/constants"
 	"github.com/khanghldk/gokit/templates"
@@ -35,8 +36,12 @@ var initCmd = &cobra.Command{
 			basePath = scanner.Text()
 		}
 
+		fmt.Println(constants.ColorYellow, "======Initialize=====")
+
 		rootFolder := projectName
 		folders := []string{"cmd", "adapters", "migrations", "configs", "errors", "dtos", "utils", "controllers", "repositories", "services"}
+		fmt.Println("Create base folders...")
+		time.Sleep(time.Second)
 		err := os.Mkdir(rootFolder, os.ModePerm)
 		if err != nil {
 			logrus.Fatal(err)
@@ -59,6 +64,8 @@ var initCmd = &cobra.Command{
 			BasePath:   basePath,
 		}
 
+		fmt.Println("Create base files...")
+		time.Sleep(time.Second)
 		err = utils.CreateFile(fmt.Sprintf("./%v/%v", "cmd", "main.go"), []byte(utils.StandardizedTemplate(templates.MainContent, params)))
 		if err != nil {
 			logrus.Fatal(err)
@@ -114,7 +121,10 @@ var initCmd = &cobra.Command{
 			logrus.Fatal(err)
 		}
 
-		err = utils.CreateFile(fmt.Sprintf("./%v",".env"), []byte(templates.EnvTemplate))
+		err = utils.CreateFile(fmt.Sprintf("./%v", ".env"), []byte(templates.EnvTemplate))
+
+		fmt.Println("Go mod init...")
+		time.Sleep(time.Second)
 
 		folder, _ := os.Getwd()
 		output, err := utils.GoModInit(moduleName, folder)
@@ -127,10 +137,18 @@ var initCmd = &cobra.Command{
 			logrus.Fatalf("Error: %v, Output: %v", err, output)
 		}
 
+		fmt.Println("Git init...")
+		time.Sleep(time.Second)
+
 		output, err = utils.GitInit(folder)
 		if err != nil {
 			logrus.Fatalf("Error: %v, Output: %v", err, output)
 		}
+
+		fmt.Println("Finish initialization!")
+		time.Sleep(time.Second / 4)
+		fmt.Print(constants.ColorBlue, fmt.Sprintf("Move to your work by: $cd %v", projectName))
+		fmt.Println()
 	},
 }
 

@@ -3,8 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/khanghldk/gokit/utils"
-	"github.com/sirupsen/logrus"
+	"github.com/khanghldk/gokit/constants"
 	"github.com/spf13/cobra"
 )
 
@@ -14,17 +13,11 @@ var verCmd = &cobra.Command{
 	Aliases: []string{"v"},
 	Short:   "Get version",
 	Run: func(cmd *cobra.Command, args []string) {
-		ver, err  := utils.GetVersion()
-		if err != nil {
-			logrus.Error("invalid version")
-			return
-		}
-
-		fmt.Printf("gokit version %v", ver)
+		message := fmt.Sprintf("gokit version %v", constants.Version)
+		fmt.Println(constants.ColorYellow, message)
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(verCmd)
 }
-
