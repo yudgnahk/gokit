@@ -114,6 +114,8 @@ var initCmd = &cobra.Command{
 			logrus.Fatal(err)
 		}
 
+		err = utils.CreateFile(fmt.Sprintf("./%v",".env"), []byte(templates.EnvTemplate))
+
 		folder, _ := os.Getwd()
 		output, err := utils.GoModInit(moduleName, folder)
 		if err != nil {

@@ -7,7 +7,7 @@ it uses:
 - [gorm](https://github.com/go-gorm/gorm) 
 - mysql
 - [swaggo](https://github.com/swaggo/swag) for docs
-- [goose](https://github.com/pressly/goose) for migrations
+- [beego](https://github.com/beego/bee) for migrations
 
 ## Installation
 ```
