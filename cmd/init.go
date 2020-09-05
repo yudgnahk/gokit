@@ -36,7 +36,7 @@ var initCmd = &cobra.Command{
 		}
 
 		rootFolder := projectName
-		folders := []string{"cmd", "adapters", "configs", "errors", "dtos", "utils", "controllers", "repositories", "services"}
+		folders := []string{"cmd", "adapters", "migrations", "configs", "errors", "dtos", "utils", "controllers", "repositories", "services"}
 		err := os.Mkdir(rootFolder, os.ModePerm)
 		if err != nil {
 			logrus.Fatal(err)
@@ -105,6 +105,11 @@ var initCmd = &cobra.Command{
 		}
 
 		err = utils.CreateFile(fmt.Sprintf("./%v/%v", "configs", "config.go"), []byte(utils.StandardizedTemplate(templates.ConfigTemplate, params)))
+		if err != nil {
+			logrus.Fatal(err)
+		}
+
+		err = utils.CreateFile(fmt.Sprintf("./%v", "Makefile"), []byte(templates.MakefileTemplate))
 		if err != nil {
 			logrus.Fatal(err)
 		}

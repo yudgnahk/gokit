@@ -6,10 +6,12 @@ it uses:
 - [go-gin](https://github.com/gin-gonic/gin)
 - [gorm](https://github.com/go-gorm/gorm) 
 - mysql
+- [swaggo](https://github.com/swaggo/swag) for docs
+- [goose](https://github.com/pressly/goose) for migrations
 
 ## Installation
 ```
-go get github.com/khanghldk/gokit
+go get -u github.com/khanghldk/gokit
 ```
 
 ## Usage
@@ -22,12 +24,15 @@ gokit init
 ```
 gokit new [type] [name]
 ```
-
 In which type:
 - `controller` - it will generate a controller, a service and a repository
 - `service`    - it will generate a service and a repository
 - `repository` - it will generate only a repository
 
+3. Version:
+```
+gokit version
+```
 
 ## Contributing
 1. Fork it!
