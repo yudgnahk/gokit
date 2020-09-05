@@ -1,5 +1,6 @@
 package templates
 
+// ConfigTemplate ...
 const ConfigTemplate = `package configs
 
 import (

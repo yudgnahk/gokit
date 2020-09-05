@@ -1,5 +1,6 @@
 package templates
 
+// BaseController ...
 const BaseController = `package controllers
 
 import (
@@ -19,6 +20,7 @@ func (h *Base) HandleError(c *gin.Context, err error) {
 	utils.HandleError(c, err)
 }`
 
+// ControllerTemplate ...
 const ControllerTemplate = `package controllers
 
 import (
@@ -45,6 +47,7 @@ func (c *CONTROLLER_NAMEController) DoSomething(ctx *gin.Context) {
 }
 `
 
+// AppController ...
 const AppController = `package controllers
 
 import (

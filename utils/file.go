@@ -5,6 +5,7 @@ import (
 	"os"
 )
 
+// CreateFile ...
 func CreateFile(fileName string, content []byte) error {
 	_, err := os.Create(fileName)
 	if err != nil {

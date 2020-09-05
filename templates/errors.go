@@ -1,5 +1,6 @@
 package templates
 
+// ErrorsTemplate ...
 const ErrorsTemplate = `package errors
 
 import (
@@ -113,6 +114,7 @@ func Wrapf(errCode ErrorCode, err error, msg string, args ...interface{}) error 
 }
 `
 
+// ErrorCodesTemplate ...
 const ErrorCodesTemplate = `package errors
 
 import (

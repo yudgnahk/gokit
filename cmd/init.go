@@ -122,6 +122,9 @@ var initCmd = &cobra.Command{
 		}
 
 		err = utils.CreateFile(fmt.Sprintf("./%v", ".env"), []byte(templates.EnvTemplate))
+		if err != nil {
+			logrus.Fatal(err)
+		}
 
 		fmt.Println("Go mod init...")
 		time.Sleep(time.Second)

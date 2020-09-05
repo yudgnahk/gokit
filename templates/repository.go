@@ -1,5 +1,6 @@
 package templates
 
+// RepositoryTemplate ...
 const RepositoryTemplate = `package repositories
 
 import (

@@ -11,18 +11,21 @@ import (
 	"github.com/khanghldk/gokit/constants"
 )
 
+// GoModInit ...
 func GoModInit(moduleName, dir string) ([]byte, error) {
 	cmd := exec.Command("bash", "-c", fmt.Sprintf("go mod init %v", moduleName))
 	cmd.Dir = dir
 	return cmd.CombinedOutput()
 }
 
+// GoModTidy ...
 func GoModTidy(dir string) ([]byte, error) {
 	cmd := exec.Command("bash", "-c", "go mod tidy")
 	cmd.Dir = dir
 	return cmd.CombinedOutput()
 }
 
+// GetModuleName ...
 func GetModuleName() string {
 	var result string
 	var count = 0

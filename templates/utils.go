@@ -1,5 +1,6 @@
 package templates
 
+// ResponseUtil ...
 const ResponseUtil = `package utils
 
 import (

@@ -1,15 +1,16 @@
 package constants
 
+// Definition constants
 const (
-	MODULE_NAME           = "MODULE_NAME"
-	BACK_STICK            = "BACK_STICK"
-	BASE_PATH             = "BASE_PATH"
-	CONTROLLER_NAME       = "CONTROLLER_NAME"
-	CONTROLLER_NAME_LOWER = "controller_name"
-	SERVICE_NAME          = "SERVICE_NAME"
-	SERVICE_NAME_LOWER    = "service_name"
-	REPOSITORY_NAME       = "REPOSITORY_NAME"
-	REPOSITORY_NAME_LOWER = "repository_name"
+	ModuleName          = "MODULE_NAME"
+	BackStick           = "BACK_STICK"
+	BasePath            = "BASE_PATH"
+	ControllerName      = "CONTROLLER_NAME"
+	ControllerNameLower = "controller_name"
+	ServiceName         = "SERVICE_NAME"
+	ServiceNameLower    = "service_name"
+	RepositoryName      = "REPOSITORY_NAME"
+	RepositoryNameLower = "repository_name"
 
 	Space       = " "
 	Underscore  = "_"

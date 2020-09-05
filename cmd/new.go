@@ -84,6 +84,7 @@ var newCmd = &cobra.Command{
 	},
 }
 
+// GenerateController ...
 func GenerateController(params utils.StandardizeParams) error {
 	path := fmt.Sprintf("./%v", "controllers")
 	fileName := utils.Snake(params.ControllerName)
@@ -97,6 +98,7 @@ func GenerateController(params utils.StandardizeParams) error {
 	return err
 }
 
+// GenerateService ...
 func GenerateService(params utils.StandardizeParams) error {
 	path := fmt.Sprintf("./%v", "services")
 	fileName := utils.Snake(params.ServiceName)
@@ -109,6 +111,7 @@ func GenerateService(params utils.StandardizeParams) error {
 	return err
 }
 
+// GenerateRepository ...
 func GenerateRepository(params utils.StandardizeParams) error {
 	path := fmt.Sprintf("./%v", "repositories")
 	fileName := utils.Snake(params.RepositoryName)

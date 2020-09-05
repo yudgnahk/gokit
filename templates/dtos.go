@@ -1,5 +1,6 @@
 package templates
 
+// BaseDtos ...
 const BaseDtos = `package dtos
 
 // Meta is common meta.
@@ -9,6 +10,7 @@ type Meta struct {
 }
 `
 
+// HealthDtos ...
 const HealthDtos = `package dtos
 
 // HealthResponse represent body response of health check API.

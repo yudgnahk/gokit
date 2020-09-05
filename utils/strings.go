@@ -13,6 +13,7 @@ import (
 // snake: hello_world
 // camel words: HelloWorld
 
+// Snake ...
 func Snake(s string) string {
 	var result string
 	if strings.Contains(s, constants.Space) {
@@ -45,6 +46,7 @@ func Snake(s string) string {
 	return result
 }
 
+// Camel ...
 func Camel(s string, lowerFirst bool) string {
 	var result string
 	if strings.Contains(s, constants.Space) {
@@ -86,6 +88,7 @@ func Camel(s string, lowerFirst bool) string {
 	return result
 }
 
+// UcFirst ...
 func UcFirst(str string) string {
 	for i, v := range str {
 		return string(unicode.ToUpper(v)) + str[i+1:]
@@ -93,6 +96,7 @@ func UcFirst(str string) string {
 	return ""
 }
 
+// LcFirst ...
 func LcFirst(str string) string {
 	for i, v := range str {
 		return string(unicode.ToLower(v)) + str[i+1:]

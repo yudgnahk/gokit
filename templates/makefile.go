@@ -1,5 +1,6 @@
 package templates
 
+// MakefileTemplate ...
 const MakefileTemplate = `prepare:
 	@go get -u github.com/beego/bee
 	@go get -u github.com/swaggo/swag

@@ -1,5 +1,6 @@
 package templates
 
+// ServiceTemplate ...
 const ServiceTemplate = `package services
 
 import (

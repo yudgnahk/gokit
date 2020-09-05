@@ -1,5 +1,6 @@
 package templates
 
+// DBAdapterTemplate ...
 const DBAdapterTemplate = `package database
 
 import (

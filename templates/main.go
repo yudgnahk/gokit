@@ -1,5 +1,6 @@
 package templates
 
+// MainContent ...
 const MainContent = `package main
 
 import (

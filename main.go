@@ -17,7 +17,7 @@ func main() {
 		return
 	}
 
-	pwd, err = filepath.EvalSymlinks(pwd)
+	_, err = filepath.EvalSymlinks(pwd)
 	if err != nil {
 		logrus.Error(err)
 		return
