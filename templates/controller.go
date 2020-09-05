@@ -22,8 +22,6 @@ func (h *Base) HandleError(c *gin.Context, err error) {
 const ControllerTemplate = `package controllers
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"MODULE_NAME/services"
 )

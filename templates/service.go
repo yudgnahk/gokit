@@ -12,7 +12,7 @@ type SERVICE_NAMEService interface {
 }
 
 type service_nameService struct {
-	repository_nameRepoRepo repositories.REPOSITORY_NAMERepository
+	repository_nameRepo repositories.REPOSITORY_NAMERepository
 }
 
 // NewSERVICE_NAMEService create new campaign service handler

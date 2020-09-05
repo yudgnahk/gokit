@@ -3,10 +3,6 @@ package templates
 const RepositoryTemplate = `package repositories
 
 import (
-	"encoding/base64"
-	"time"
-
-	"github.com/jinzhu/gorm"
 	"MODULE_NAME/adapters"
 )
 
