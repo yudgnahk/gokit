@@ -3,7 +3,7 @@ package utils
 import (
 	"strings"
 
-	"gokit/constants"
+	"github.com/khanghldk/gokit/constants"
 )
 
 type StandardizeParams struct {

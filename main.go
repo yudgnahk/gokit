@@ -4,8 +4,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"gokit/cmd"
-
+	"github.com/khanghldk/gokit/cmd"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"gokit/constants"
+	"github.com/khanghldk/gokit/constants"
 )
 
 // support:

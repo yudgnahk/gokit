@@ -1,4 +1,4 @@
-module gokit
+module github.com/khanghldk/gokit
 
 require (
 	github.com/sirupsen/logrus v1.6.0

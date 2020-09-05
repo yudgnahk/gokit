@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/khanghldk/gokit/constants"
+	"github.com/khanghldk/gokit/templates"
+	"github.com/khanghldk/gokit/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"gokit/constants"
-	"gokit/templates"
-	"gokit/utils"
 )
 
 var projectName, moduleName, basePath string
@@ -59,7 +59,7 @@ var initCmd = &cobra.Command{
 			BasePath:   basePath,
 		}
 
-		err = utils.CreateFile(fmt.Sprintf("./%v/%v", "cmd", "main.go"), []byte(utils.StandardizedTemplate(templates.MainContent, params) ))
+		err = utils.CreateFile(fmt.Sprintf("./%v/%v", "cmd", "main.go"), []byte(utils.StandardizedTemplate(templates.MainContent, params)))
 		if err != nil {
 			logrus.Fatal(err)
 		}

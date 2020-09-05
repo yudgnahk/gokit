@@ -8,7 +8,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"gokit/constants"
+	"github.com/khanghldk/gokit/constants"
 )
 
 func GoModInit(moduleName, dir string) ([]byte, error) {

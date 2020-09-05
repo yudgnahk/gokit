@@ -5,11 +5,11 @@ import (
 	"os"
 	"strings"
 
+	"github.com/khanghldk/gokit/constants"
+	"github.com/khanghldk/gokit/templates"
+	"github.com/khanghldk/gokit/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"gokit/constants"
-	"gokit/templates"
-	"gokit/utils"
 )
 
 // newCmd represents the new command
