@@ -4,8 +4,8 @@ package templates
 const BaseController = `package controllers
 
 import (
-"github.com/gin-gonic/gin"
-"MODULE_NAME/utils"
+	"github.com/gin-gonic/gin"
+	"MODULE_NAME/utils"
 )
 
 type Base struct{}

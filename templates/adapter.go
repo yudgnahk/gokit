@@ -7,20 +7,15 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
-	// MySQL driver
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/plugin/dbresolver"
 )
 
 // Errs alias
 var (
 	ErrRecordNotFound = gorm.ErrRecordNotFound
-)
-
-// Package constants definition.
-const (
-	MySQLDialect = "mysql"
 )
 
 // DBAdapter interface represent adapter connect to DB
@@ -46,18 +41,25 @@ func NewDB() DBAdapter {
 
 // Open opens a DB connection.
 func (db *adapter) Open(connectionString string) error {
-	gormDB, err := gorm.Open(MySQLDialect, connectionString)
+	gormDB, err := gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+
 	if err != nil {
 		return err
 	}
-	gormDB.DB().SetConnMaxLifetime(time.Minute * 10)
 	db.gormer = gormDB
+	gormDB.Use(
+		dbresolver.Register(dbresolver.Config{ /* xxx */ }).
+			SetConnMaxIdleTime(time.Hour).
+			SetConnMaxLifetime(24 * time.Hour).
+			SetMaxIdleConns(100).
+			SetMaxOpenConns(200),
+	)
 	return nil
 }
 
 // Close closes DB connection.
 func (db *adapter) Close() {
-	_ = db.gormer.Close()
+	_ = db.DB().Close()
 }
 
 // Begin starts a DB transaction.
@@ -91,6 +93,8 @@ func (db *adapter) Gormer() *gorm.DB {
 
 // DB returns an instance of sql.DB.
 func (db *adapter) DB() *sql.DB {
-	return db.gormer.DB()
+	database, _ := db.gormer.DB()
+	return database
 }
 `
+
