@@ -25,6 +25,12 @@ func GoModTidy(dir string) ([]byte, error) {
 	return cmd.CombinedOutput()
 }
 
+func GoFmt(dir string) ([]byte, error) {
+	cmd := exec.Command("bash", "-c", "gofmt -w .")
+	cmd.Dir = dir
+	return cmd.CombinedOutput()
+}
+
 // GetModuleName ...
 func GetModuleName() string {
 	var result string

@@ -1,15 +1,11 @@
-package templates
-
-// DBAdapterTemplate ...
-const DBAdapterTemplate = `package database
+package database
 
 import (
 	"database/sql"
 	"time"
 
-	"gorm.io/gorm"
-
 	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 	"gorm.io/plugin/dbresolver"
 )
 
@@ -41,12 +37,21 @@ func NewDB() DBAdapter {
 
 // Open opens a DB connection.
 func (db *adapter) Open(connectionString string) error {
-	gormDB, err := gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+	//newLogger := logger.New(
+	//	log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+	//	logger.Config{
+	//		SlowThreshold: time.Second, // Slow SQL threshold
+	//		LogLevel:      logger.Info, // Log level
+	//		Colorful:      true,        // Disable color
+	//	},
+	//)
 
+	gormDB, err := gorm.Open(mysql.Open(connectionString), &gorm.Config{})
 	if err != nil {
 		return err
 	}
 	db.gormer = gormDB
+
 	gormDB.Use(
 		dbresolver.Register(dbresolver.Config{ /* xxx */ }).
 			SetConnMaxIdleTime(time.Hour).
@@ -96,4 +101,3 @@ func (db *adapter) DB() *sql.DB {
 	database, _ := db.gormer.DB()
 	return database
 }
-`
