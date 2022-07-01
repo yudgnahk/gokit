@@ -8,7 +8,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/khanghldk/gokit/constants"
+	"github.com/yudgnahk/gokit/constants"
 )
 
 // GoModInit ...

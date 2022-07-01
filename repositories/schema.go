@@ -3,9 +3,9 @@ package repositories
 import (
 	"fmt"
 
-	database "github.com/khanghldk/gokit/adapters"
-	"github.com/khanghldk/gokit/configs"
-	"github.com/khanghldk/gokit/models"
+	database "github.com/yudgnahk/gokit/adapters"
+	"github.com/yudgnahk/gokit/configs"
+	"github.com/yudgnahk/gokit/models"
 )
 
 type Schema interface {

@@ -11,7 +11,7 @@ it uses:
 
 ## Installation
 ```
-go get -u github.com/khanghldk/gokit
+go get -u github.com/yudgnahk/gokit
 ```
 
 ## Usage

@@ -6,11 +6,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/khanghldk/gokit/constants"
-	"github.com/khanghldk/gokit/templates"
-	"github.com/khanghldk/gokit/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/yudgnahk/gokit/constants"
+	"github.com/yudgnahk/gokit/templates"
+	"github.com/yudgnahk/gokit/utils"
 )
 
 var projectName, moduleName, basePath string

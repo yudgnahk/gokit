@@ -5,15 +5,15 @@ import (
 	"os"
 	"strings"
 
-	database "github.com/khanghldk/gokit/adapters"
-	"github.com/khanghldk/gokit/configs"
-	"github.com/khanghldk/gokit/constants"
-	"github.com/khanghldk/gokit/models"
-	"github.com/khanghldk/gokit/repositories"
-	"github.com/khanghldk/gokit/templates"
-	"github.com/khanghldk/gokit/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	database "github.com/yudgnahk/gokit/adapters"
+	"github.com/yudgnahk/gokit/configs"
+	"github.com/yudgnahk/gokit/constants"
+	"github.com/yudgnahk/gokit/models"
+	"github.com/yudgnahk/gokit/repositories"
+	"github.com/yudgnahk/gokit/templates"
+	"github.com/yudgnahk/gokit/utils"
 )
 
 // genModelCmd represents the new command
@@ -72,7 +72,7 @@ func createModel(columns []*models.MySQLColumn, dir, tableName string) {
 
 	model := strings.ReplaceAll(templates.ModelTemplate, constants.ModelContent, columnsRaw)
 	model = strings.ReplaceAll(model, constants.ModelNameLower, utils.Camel(tableName, false))
-	err := 	utils.CreateFile(fileName, []byte(model))
+	err := utils.CreateFile(fileName, []byte(model))
 	if err != nil {
 		logrus.Fatal(err)
 	}

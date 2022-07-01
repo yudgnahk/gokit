@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/khanghldk/gokit/constants"
 	"github.com/spf13/cobra"
+	"github.com/yudgnahk/gokit/constants"
 )
 
 // verCmd represents the version command
