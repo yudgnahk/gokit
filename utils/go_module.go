@@ -32,10 +32,13 @@ func GoFmt(dir string) ([]byte, error) {
 }
 
 // GetModuleName ...
-func GetModuleName() string {
+func GetModuleName(path string) string {
+	if path == "" {
+		path = "go.mod"
+	}
 	var result string
 	var count = 0
-	file, err := os.Open("go.mod")
+	file, err := os.Open(path)
 	if err != nil {
 		log.Fatal(err)
 	}

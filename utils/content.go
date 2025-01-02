@@ -31,3 +31,9 @@ func StandardizedTemplate(content string, params StandardizeParams) string {
 
 	return content
 }
+
+func StandardizedTmplFile(filePath string, params StandardizeParams) string {
+	//content := os.ReadFile(filePath)
+	//WriteFile(filePath, StandardizedTemplate(content, params))
+	return ""
+}
