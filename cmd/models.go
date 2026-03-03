@@ -22,14 +22,45 @@ var genModelsCmd = &cobra.Command{
 	Aliases: []string{"m"},
 	Short:   "Generate models from database",
 	Run: func(cmd *cobra.Command, args []string) {
+		connectionString, err := cmd.Flags().GetString("conStr")
+		if err != nil {
+			logrus.Fatalf("Getting connection string: %v", err)
+		}
+
+		source, err := cmd.Flags().GetString("source")
+		if err != nil {
+			logrus.Fatalf("Getting source: %v", err)
+		}
+
+		modelsDir, err := cmd.Flags().GetString("modelsDir")
+		if err != nil {
+			logrus.Fatalf("Getting modelsDir: %v", err)
+		}
+
+		schemaName, err := cmd.Flags().GetString("schema")
+		if err != nil {
+			logrus.Fatalf("Getting schema: %v", err)
+		}
+
+		mysql, _ := cmd.Flags().GetBool("mysql")
+		postgresql, _ := cmd.Flags().GetBool("postgresql")
+		if !mysql && !postgresql {
+			logrus.Fatalf("Please specify the database type with --mysql or --postgresql")
+		}
+
+		var dbType database.DBType
+		if mysql {
+			dbType = database.MySQLType
+		} else if postgresql {
+			dbType = database.PostgreSQLType
+		}
+
 		fmt.Print(constants.ColorBlue, "Generate models...\n")
 
-		dir := "models"
-
-		os.Mkdir(dir, os.ModePerm)
+		os.Mkdir(fmt.Sprintf("%v/%v", source, modelsDir), os.ModePerm)
 
 		db := database.NewDB()
-		if err := db.Open(configs.AppConfig.DB.ConnectionString()); err != nil {
+		if err := db.Open(connectionString, dbType, schemaName); err != nil {
 			logrus.Fatalf("Creating connection to DB: %v", err)
 		}
 
@@ -39,26 +70,34 @@ var genModelsCmd = &cobra.Command{
 			logrus.Fatalf("error: %v", err)
 		}
 
+		fmt.Println(tables, err)
+
 		for i := range tables {
 			if tables[i] == "migrations" {
 				continue
 			}
 			columns, err := schema.GetColumns(tables[i])
+
+			for _, column := range columns {
+				fmt.Println(column)
+			}
+
 			if err != nil {
 				logrus.Errorf("Get columns of table %v got error %v", tables[i], err)
 			} else {
 				fmt.Println("Creating model", utils.Camel(tables[i], false), "...")
-				createModel(columns, dir, tables[i])
+				createModel(columns, fmt.Sprintf("%v/%v", source, modelsDir), tables[i])
 			}
 		}
 
-		utils.GoFmt(dir)
+		utils.GoFmt(source)
 		fmt.Println("Finish generating models")
 	},
 }
 
 func createModel(columns []*models.MySQLColumn, dir, tableName string) {
-	fileName := fmt.Sprintf("./models/%v.go", utils.Snake(tableName))
+	fileName := fmt.Sprintf("%v/%v.go", dir, utils.Snake(tableName))
+	fmt.Println("Creating file", fileName, "...")
 	columnsRaw := ""
 
 	for i := 0; i < len(columns); i++ {
@@ -128,4 +167,10 @@ func init() {
 	}
 
 	RootCmd.AddCommand(genModelsCmd)
+	genModelsCmd.Flags().StringP("conStr", "c", "", "Connection string to database")
+	genModelsCmd.Flags().StringP("source", "s", "", "Source directory")
+	genModelsCmd.Flags().StringP("modelsDir", "m", "models", "Models directory")
+	genModelsCmd.Flags().Bool("mysql", false, "Use MySQL")
+	genModelsCmd.Flags().Bool("postgresql", false, "Use PostgreSQL")
+	genModelsCmd.Flags().StringP("schema", "p", "", "Schema name")
 }

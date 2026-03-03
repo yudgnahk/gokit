@@ -18,7 +18,7 @@ type schema struct {
 }
 
 const (
-	BaseTable   = "base table"
+	BaseTable   = "BASE TABLE"
 	TableType   = "table_type"
 	TableSchema = "table_schema"
 	TableName   = "table_name"
@@ -46,6 +46,7 @@ func (r *schema) GetTables() ([]string, error) {
 func (r *schema) GetColumns(tableName string) ([]*models.MySQLColumn, error) {
 	gormer := r.db.Gormer()
 	var columns []*models.MySQLColumn
+	fmt.Println(configs.AppConfig.DB.Database, tableName)
 	if err := gormer.Model(&models.MySQLColumn{}).
 		Select("column_name, ordinal_position, data_type, column_type, column_key, extra").
 		Where(fmt.Sprintf("%v = ? AND %v = ?", TableSchema, TableName),

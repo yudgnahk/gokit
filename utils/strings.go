@@ -103,3 +103,8 @@ func LcFirst(str string) string {
 	}
 	return ""
 }
+
+func GetLastPart(s string) string {
+	words := strings.Split(s, constants.Slash)
+	return words[len(words)-1]
+}

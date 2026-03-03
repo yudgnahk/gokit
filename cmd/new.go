@@ -26,7 +26,7 @@ var newCmd = &cobra.Command{
 		var genType = args[0]
 
 		var name = strings.Join(args[1:], constants.Underscore)
-		moduleName := utils.GetModuleName()
+		moduleName := utils.GetModuleName("")
 
 		params := utils.StandardizeParams{
 			ModuleName:     moduleName,

@@ -13,14 +13,14 @@ import (
 	"github.com/yudgnahk/gokit/utils"
 )
 
-var projectName, moduleName, basePath string
-
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:     "init",
 	Aliases: []string{"n"},
 	Short:   "Init project",
 	Run: func(cmd *cobra.Command, args []string) {
+		var projectName, moduleName, basePath string
+
 		scanner := bufio.NewScanner(os.Stdin)
 		fmt.Print(constants.ColorGreen, "Project name: ")
 		if scanner.Scan() {

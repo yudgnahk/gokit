@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/plugin/dbresolver"
 )
@@ -14,20 +15,30 @@ var (
 	ErrRecordNotFound = gorm.ErrRecordNotFound
 )
 
+type DBType int
+
+const (
+	MySQLType DBType = iota
+	PostgreSQLType
+)
+
 // DBAdapter interface represent adapter connect to DB
 type DBAdapter interface {
-	Open(string) error
+	Open(connectionString string, dbType DBType, schemaName string) error
 	Close()
 	Begin() DBAdapter
 	RollbackUselessCommitted()
 	Commit()
 	Gormer() *gorm.DB
 	DB() *sql.DB
+	Schema() string
 }
 
 type adapter struct {
 	gormer      *gorm.DB
 	isCommitted bool
+	dbType      DBType
+	dbName      string
 }
 
 // NewDB returns a new instance of DB.
@@ -36,17 +47,19 @@ func NewDB() DBAdapter {
 }
 
 // Open opens a DB connection.
-func (db *adapter) Open(connectionString string) error {
-	//newLogger := logger.New(
-	//	log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
-	//	logger.Config{
-	//		SlowThreshold: time.Second, // Slow SQL threshold
-	//		LogLevel:      logger.Info, // Log level
-	//		Colorful:      true,        // Disable color
-	//	},
-	//)
+func (db *adapter) Open(connectionString string, dbType DBType, schemaName string) error {
+	db.dbType = dbType
+	db.dbName = schemaName
 
-	gormDB, err := gorm.Open(mysql.Open(connectionString), &gorm.Config{})
+	var dialect gorm.Dialector
+	switch dbType {
+	case MySQLType:
+		dialect = mysql.Open(connectionString)
+	case PostgreSQLType:
+		dialect = postgres.Open(connectionString)
+	}
+
+	gormDB, err := gorm.Open(dialect, &gorm.Config{})
 	if err != nil {
 		return err
 	}
@@ -100,4 +113,8 @@ func (db *adapter) Gormer() *gorm.DB {
 func (db *adapter) DB() *sql.DB {
 	database, _ := db.gormer.DB()
 	return database
+}
+
+func (db *adapter) Schema() string {
+	return db.dbName
 }

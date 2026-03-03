@@ -13,17 +13,19 @@ const (
 
 // App represents all configuration of qr-service application.
 type App struct {
-	DB      MySQL
+	DB MySQL
 }
 
 // MySQL represents configuration of MySQL database.
 type MySQL struct {
 	Username string `default:"root" envconfig:"MYSQL_USER"`
-	Password string `default:"root" envconfig:"MYSQL_PASS"`
+	Password string `default:"test" envconfig:"MYSQL_PASS"`
 	Host     string `default:"127.0.0.1" envconfig:"MYSQL_HOST"`
 	Port     int    `default:"3306" envconfig:"MYSQL_PORT"`
-	Database string `default:"evoucher_service" envconfig:"MYSQL_DB"`
+	Database string `default:"test" envconfig:"MYSQL_DB"`
 }
+
+// root:test@tcp(localhost:3306)/test
 
 // ConnectionString returns connection string of MySQL database.
 func (c *MySQL) ConnectionString() string {
